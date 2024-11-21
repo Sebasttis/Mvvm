@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.sebastian.mvvmapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sebastian.mvvmapp"
@@ -33,12 +33,26 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+// LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+// Fragment
+    implementation("androidx.fragment:fragment-ktx:1.3.2")
+// Activity
+    implementation("androidx.activity:activity-ktx:1.2.2")
+
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
