@@ -1,13 +1,14 @@
-package com.sebastian.mvvmapp.view
+package com.sebastian.mvvmapp.ui.view
 
 import android.os.Bundle
 import androidx.activity.viewModels
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 
 import com.sebastian.mvvmapp.databinding.ActivityMainBinding
-import com.sebastian.mvvmapp.viewmodel.QuoteViewModel
+import com.sebastian.mvvmapp.ui.viewmodel.QuoteViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,12 +24,22 @@ class MainActivity : AppCompatActivity() {
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
+            quoteViewModel.onCreate()
+
 
             quoteViewModel.quoteModel.observe(this, Observer { currentQuote ->
                 binding.tvQuote.text = currentQuote.quote
                 binding.tvAuthor.text = currentQuote.author
             })
 
+           quoteViewModel.isLoading.observe(this, Observer{
+               binding.pfBar.isVisible = it
+
+           })
+
             binding.viewContainer.setOnClickListener { quoteViewModel.randomQuote() }
+
+
+
         }
     }
